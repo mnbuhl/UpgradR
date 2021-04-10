@@ -9,7 +9,7 @@ namespace Catalog.Api.Data
     {
         public static async Task SeedData(IMongoCollection<Product> products)
         {
-            bool productsExist = await products.CountDocumentsAsync(FilterDefinition<Product>.Empty) > 0;
+            bool productsExist = await products.Find(p => true).AnyAsync();
 
             if (productsExist)
                 return;
