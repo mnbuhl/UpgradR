@@ -1,5 +1,9 @@
+using Catalog.Api.Contracts.v1.Products;
+using Catalog.Api.Data;
+using Catalog.Api.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -9,17 +13,27 @@ namespace Catalog.Api
 {
     public class Startup
     {
+        private IConfiguration _configuration;
+        
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddScoped<ICatalogContext, CatalogContext>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddApiVersioning(opt =>
+            {
+                opt.DefaultApiVersion = new ApiVersion(1, 0);
+                opt.RouteConstraintName = "apiVersion";
+                opt.ReportApiVersions = true;
+                opt.AssumeDefaultVersionWhenUnspecified = true;
+            });
+            services.AddAutoMapper(typeof(MappingProfile).Assembly);
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Catalog.Api", Version = "v1" });
