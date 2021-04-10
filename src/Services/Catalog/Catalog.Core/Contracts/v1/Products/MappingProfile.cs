@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using Catalog.Api.Entities;
+using Catalog.Core.Entities;
 
-namespace Catalog.Api.Contracts.v1.Products
+namespace Catalog.Core.Contracts.v1.Products
 {
     public class MappingProfile : Profile
     {

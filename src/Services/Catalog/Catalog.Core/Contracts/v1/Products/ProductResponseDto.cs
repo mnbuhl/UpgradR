@@ -1,4 +1,4 @@
-﻿namespace Catalog.Api.Contracts.v1.Products
+﻿namespace Catalog.Core.Contracts.v1.Products
 {
     public class ProductResponseDto
     {

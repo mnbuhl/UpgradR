@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using Catalog.Api.Contracts.v1.Products;
-using Catalog.Api.Entities;
-using Catalog.Api.Repositories;
+using Catalog.Core.Contracts.v1.Products;
+using Catalog.Core.Entities;
+using Catalog.Core.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -135,6 +135,5 @@ namespace Catalog.Api.Controllers.v1
 
             return deleted ? NoContent() : NotFound();
         }
-        
     }
 }

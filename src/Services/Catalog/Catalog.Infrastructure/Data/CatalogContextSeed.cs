@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Catalog.Api.Entities;
+using Catalog.Core.Entities;
 using MongoDB.Driver;
 
-namespace Catalog.Api.Data
+namespace Catalog.Infrastructure.Data
 {
     public class CatalogContextSeed
     {

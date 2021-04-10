@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Catalog.Api.Data;
-using Catalog.Api.Entities;
+using Catalog.Core.Entities;
+using Catalog.Core.Interfaces;
 using MongoDB.Driver;
 
-namespace Catalog.Api.Repositories
+namespace Catalog.Infrastructure.Data.Repositories
 {
     public class ProductRepository : IProductRepository
     {
@@ -22,19 +22,19 @@ namespace Catalog.Api.Repositories
 
         public async Task<Product> GetProduct(string id)
         {
-            return await _context.Products.Find(p => p.Id == id).FirstOrDefaultAsync();
+            return await _context.Products.Find(p => p.Id == id)
+                .FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<Product>> GetProductsByName(string name)
         {
-            FilterDefinition<Product> filter = Builders<Product>.Filter.ElemMatch(p => p.Name, name);
-
-            return await _context.Products.Find(filter).ToListAsync();
+            return await _context.Products
+                .Find(p => p.Name.ToLower().Contains(name.ToLower())).ToListAsync();
         }
 
         public async Task<IEnumerable<Product>> GetProductsByCategory(string categoryName)
         {
-            FilterDefinition<Product> filter = Builders<Product>.Filter.ElemMatch(p => p.Category, categoryName);
+            FilterDefinition<Product> filter = Builders<Product>.Filter.Eq(p => p.Category, categoryName);
 
             return await _context.Products.Find(filter).ToListAsync();
         }
@@ -47,7 +47,8 @@ namespace Catalog.Api.Repositories
         public async Task<bool> UpdateProduct(Product product)
         {
             var updateResult =
-                await _context.Products.ReplaceOneAsync(filter: p => p.Id == product.Id, replacement: product);
+                await _context.Products.ReplaceOneAsync(filter: p => p.Id == product.Id,
+                    replacement: product);
 
             return updateResult.IsAcknowledged && updateResult.ModifiedCount > 0;
         }
