@@ -12,6 +12,7 @@ namespace Catalog.Infrastructure.Data
             var database = client.GetDatabase(config.DatabaseName);
 
             Products = database.GetCollection<Product>(config.CollectionName);
+
             CatalogContextSeed.SeedData(Products).Wait();
         }
 

@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Catalog.Core.Entities;
+﻿using Catalog.Core.Entities;
 using MongoDB.Driver;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Catalog.Infrastructure.Data
 {

@@ -1,0 +1,7 @@
+Commands to start & stop:
+docker-compose -f .\docker-compose.yml -f .\docker-compose.override.yml up -d
+docker-compose -f .\docker-compose.yml -f .\docker-compose.override.yml down
+
+Ports:
+Catalog.API : http://localhost:8000/swagger/index.html
+CatalogDb : http://localhost:27017/
