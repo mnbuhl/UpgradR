@@ -1,6 +1,6 @@
 # UpgradR
 
-UpgradR is a computer components web store. 
+UpgradR is a computer hardware web store. 
 It is built with a variety of technologies (primarily ASP.NET) 
 implemented into microservices, running in a scalable docker environment.
 
