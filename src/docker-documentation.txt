@@ -5,7 +5,11 @@ docker-compose -f .\docker-compose.yml -f .\docker-compose.override.yml down
 MongoDB GUI:
 docker run -d -p 3000:3000 mongoclient/mongoclient
 
+Redis:
+docker run -d -p 6379:6379 --name upgradr-redis redis 
+
 Ports:
 Catalog.API : http://localhost:8000/swagger/index.html
 CatalogDb : http://localhost:27017/
+BasketRedis : http://localhost:6379/
 MongoDB GUI : http://localhost:3000/
