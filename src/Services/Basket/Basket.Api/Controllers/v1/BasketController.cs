@@ -26,7 +26,7 @@ namespace Basket.Api.Controllers.v1
             _mapper = mapper;
         }
 
-        [HttpGet("{userName}")]
+        [HttpGet("{userName}", Name = "GetBasket")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<ShoppingCartResponseDto>> Get(string userName)
         {
