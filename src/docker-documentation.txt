@@ -2,14 +2,17 @@ Commands to start & stop:
 docker-compose -f .\docker-compose.yml -f .\docker-compose.override.yml up -d
 docker-compose -f .\docker-compose.yml -f .\docker-compose.override.yml down
 
+Ports:
+Catalog.Api : http://localhost:8000/swagger/index.html
+Basket.Api : http://localhost:8001/swagger/index.html
+CatalogDb : http://localhost:27017/
+BasketCache : http://localhost:6379/
+
 MongoDB GUI:
 docker run -d -p 3000:3000 mongoclient/mongoclient
+MongoDB GUI : http://localhost:3000/
 
 Redis:
 docker run -d -p 6379:6379 --name upgradr-redis redis 
 
-Ports:
-Catalog.API : http://localhost:8000/swagger/index.html
-CatalogDb : http://localhost:27017/
-BasketRedis : http://localhost:6379/
-MongoDB GUI : http://localhost:3000/
+Portainer:
