@@ -27,7 +27,7 @@ namespace Basket.Infrastructure.Repositories
 
         public async Task<ShoppingCart> UpdateBasket(ShoppingCart basket)
         {
-            await _cache.SetStringAsync(basket.UserName, JsonSerializer.Serialize<ShoppingCart>(basket));
+            await _cache.SetStringAsync(basket.UserName, JsonSerializer.Serialize(basket));
 
             return await GetBasket(basket.UserName);
         }
