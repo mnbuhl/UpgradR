@@ -48,7 +48,7 @@ namespace Discount.Infrastructure.Repositories
 
             bool success = await connection.ExecuteAsync
                 ("INSERT INTO Coupon (ProductId, Description, Amount) VALUES (@ProductId, @Description, @Amount)",
-                new { ProductId = coupon.ProductId, Description = coupon.Description, Amount = coupon.Amount }) > 0;
+                new { coupon.ProductId, coupon.Description, coupon.Amount }) > 0;
 
             return success;
         }
@@ -59,7 +59,7 @@ namespace Discount.Infrastructure.Repositories
 
             bool success = await connection.ExecuteAsync
                 ("UPDATE Coupon SET ProductId = @ProductId, Description = @Description, Amount = @Amount WHERE Id = @Id",
-                new { ProductId = coupon.ProductId, Description = coupon.Description, Amount = coupon.Amount, Id = coupon.Id }) > 0;
+                new { coupon.ProductId, coupon.Description, coupon.Amount, coupon.Id }) > 0;
 
             return success;
         }
