@@ -3,15 +3,15 @@ docker-compose -f .\docker-compose.yml -f .\docker-compose.override.yml up -d
 docker-compose -f .\docker-compose.yml -f .\docker-compose.override.yml down
 
 Ports:
-Portainer : http://localhost:9000/ / user:admin pass=secretpw123
+Portainer : http://localhost:9000/ / user=admin pass=secretpw123
 
 Catalog.Api : http://localhost:8000/swagger/index.html
-CatalogDb : http://localhost:27017/
+CatalogDb : http://localhost:27017/ / MongoDb
 MongoDB GUI : http://localhost:3000/ / docker run -d -p 3000:3000 mongoclient/mongoclient
 
 Basket.Api : http://localhost:8001/swagger/index.html
-BasketCache : http://localhost:6379/
+BasketCache : http://localhost:6379/ / Redis
 
-DiscountDb : http://localhost:5432/
+DiscountDb : http://localhost:5432/ / PostgreSQL
 pgAdmin : http://localhost:5050/ / user=admin@upgradr.com pass=secretpw123
 
