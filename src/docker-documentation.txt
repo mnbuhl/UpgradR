@@ -12,6 +12,7 @@ MongoDB GUI : http://localhost:3000/ / docker run -d -p 3000:3000 mongoclient/mo
 Basket.Api : http://localhost:8001/swagger/index.html
 BasketCache : http://localhost:6379/ / Redis
 
+Discount.Api : http://localhost:8002/swagger/index.html
 DiscountDb : http://localhost:5432/ / PostgreSQL
 pgAdmin : http://localhost:5050/ / user=admin@upgradr.com pass=secretpw123
 
