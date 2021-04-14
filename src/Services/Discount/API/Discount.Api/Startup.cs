@@ -1,4 +1,5 @@
 using Discount.Api.Helpers;
+using Discount.Core.Contracts.v1.Coupons;
 using Discount.Core.Interfaces;
 using Discount.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -25,7 +26,7 @@ namespace Discount.Api
         {
             services.AddSingleton<INpgConnectionString, NpgConnectionString>();
             services.AddScoped<IDiscountRepository, DiscountRepository>();
-
+            services.AddAutoMapper(typeof(MappingProfile).Assembly);
             services.AddApiVersioning(opt =>
             {
                 opt.DefaultApiVersion = new ApiVersion(1, 0);
@@ -36,7 +37,7 @@ namespace Discount.Api
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Discount.Api", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Discount API", Version = "v1" });
             });
         }
 
@@ -47,7 +48,7 @@ namespace Discount.Api
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Discount.Api v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Discount API v1"));
             }
 
             app.UseRouting();
