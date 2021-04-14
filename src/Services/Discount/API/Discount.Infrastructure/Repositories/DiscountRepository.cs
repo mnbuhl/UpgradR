@@ -17,14 +17,14 @@ namespace Discount.Infrastructure.Repositories
             _connectionString = connectionString;
         }
 
-        public NpgsqlConnection CreateNpgScope()
+        public NpgsqlConnection CreateNpgConnectionScope()
         {
             return new NpgsqlConnection(_connectionString.ConnectionString);
         }
 
         public async Task<IList<Coupon>> GetAllDiscounts()
         {
-            await using var connection = CreateNpgScope();
+            await using var connection = CreateNpgConnectionScope();
 
             var coupons = await connection.QueryAsync<Coupon>
                 ("SELECT * FROM Coupon");
@@ -34,7 +34,7 @@ namespace Discount.Infrastructure.Repositories
 
         public async Task<Coupon> GetDiscount(string productId)
         {
-            await using var connection = CreateNpgScope();
+            await using var connection = CreateNpgConnectionScope();
 
             var coupon = await connection.QueryFirstOrDefaultAsync<Coupon>
                 ("SELECT * FROM Coupon WHERE ProductId = @ProductId", new { ProductId = productId });
@@ -42,19 +42,37 @@ namespace Discount.Infrastructure.Repositories
             return coupon ?? new Coupon { ProductId = productId, Description = "No discount available", Amount = 0 };
         }
 
-        public Task<bool> CreateDiscount(Coupon coupon)
+        public async Task<bool> CreateDiscount(Coupon coupon)
         {
-            throw new System.NotImplementedException();
+            await using var connection = CreateNpgConnectionScope();
+
+            bool success = await connection.ExecuteAsync
+                ("INSERT INTO Coupon (ProductId, Description, Amount) VALUES (@ProductId, @Description, @Amount)",
+                new { ProductId = coupon.ProductId, Description = coupon.Description, Amount = coupon.Amount }) > 0;
+
+            return success;
         }
 
-        public Task<bool> UpdateDiscount(Coupon coupon)
+        public async Task<bool> UpdateDiscount(Coupon coupon)
         {
-            throw new System.NotImplementedException();
+            await using var connection = CreateNpgConnectionScope();
+
+            bool success = await connection.ExecuteAsync
+                ("UPDATE Coupon SET ProductId = @ProductId, Description = @Description, Amount = @Amount WHERE Id = @Id",
+                new { ProductId = coupon.ProductId, Description = coupon.Description, Amount = coupon.Amount, Id = coupon.Id }) > 0;
+
+            return success;
         }
 
-        public Task<bool> DeleteDiscount(string productId)
+        public async Task<bool> DeleteDiscount(string productId)
         {
-            throw new System.NotImplementedException();
+            await using var connection = CreateNpgConnectionScope();
+
+            bool success = await connection.ExecuteAsync
+                ("DELETE FROM Coupon WHERE ProductId = @ProductId",
+                new { ProductId = productId }) > 0;
+
+            return success;
         }
     }
 }
