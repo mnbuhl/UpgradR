@@ -9,4 +9,5 @@ implemented into microservices, running in a scalable docker environment.
 * ASP.NET Core 5 MVC
 * MongoDB
 * Redis
+* PostgreSQL
 * Docker

@@ -33,7 +33,10 @@ namespace Basket.Api.Controllers.v1
             var basket = await _basketRepository.GetBasket(userName);
 
             if (basket == null)
+            {
+                _logger.LogInformation($"Basket for user: {userName} not found. Creating new.");
                 return Ok(new ShoppingCartResponseDto { UserName = userName });
+            }
 
             var basketResponse = _mapper.Map<ShoppingCartResponseDto>(basket);
 
