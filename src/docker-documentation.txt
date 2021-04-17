@@ -1,6 +1,7 @@
 Commands to start & stop:
 docker-compose -f .\docker-compose.yml -f .\docker-compose.override.yml up -d
 docker-compose -f .\docker-compose.yml -f .\docker-compose.override.yml down
+docker-compose -f .\docker-compose.yml -f .\docker-compose.override.yml up --build
 
 Ports:
 Portainer : http://localhost:9000/ / user=admin pass=secretpw123
