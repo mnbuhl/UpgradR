@@ -1,6 +1,8 @@
 using Basket.Core.Contracts.v1.ShoppingCarts;
 using Basket.Core.Interfaces;
+using Basket.Infrastructure.GrpcServices;
 using Basket.Infrastructure.Repositories;
+using Discount.Grpc.Protos.v1;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System;
 
 namespace Basket.Api
 {
@@ -30,6 +33,9 @@ namespace Basket.Api
 
 
             services.AddScoped<IBasketRepository, BasketRepository>();
+            services.AddScoped<IDiscountGrpcService, DiscountGrpcService>();
+            services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(opt =>
+                opt.Address = new Uri(_configuration.GetValue<string>("GrpcSettings:DiscountUrl")));
 
             services.AddControllers();
             services.AddApiVersioning(opt =>
