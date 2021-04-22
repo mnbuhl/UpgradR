@@ -37,7 +37,7 @@ namespace Order.Api.Controllers.v1
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<OrderResponseDto>> Checkout([FromBody] CheckoutCommand command)
         {
@@ -46,7 +46,7 @@ namespace Order.Api.Controllers.v1
             if (result == null)
                 return BadRequest();
 
-            return CreatedAtAction(nameof(GetOrders), new { username = result.UserName }, result);
+            return Ok(result);
         }
 
         [HttpPut]
