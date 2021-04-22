@@ -10,10 +10,15 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="SendGrid" Version="9.23.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Order.Application\Order.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Email\" />
   </ItemGroup>
 
 </Project>
