@@ -11,7 +11,7 @@ namespace Order.Application.Interfaces
     {
         Task<IReadOnlyList<T>> GetAllAsync(List<Expression<Func<T, object>>> includes = null,
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null);
-        Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> predicate = null,
+        Task<T> GetAsync(Expression<Func<T, bool>> predicate = null,
             List<Expression<Func<T, object>>> includes = null);
         Task<T> AddAsync(T entity);
         Task UpdateAsync(T entity);
