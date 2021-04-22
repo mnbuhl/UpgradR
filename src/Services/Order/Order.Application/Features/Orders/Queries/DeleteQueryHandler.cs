@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using Microsoft.Extensions.Logging;
 using Order.Application.Interfaces;
 using System.Threading;
@@ -15,13 +14,11 @@ namespace Order.Application.Features.Orders.Queries
     public class DeleteQueryHandler : IRequestHandler<DeleteQuery>
     {
         private readonly IOrderRepository _orderRepository;
-        private readonly IMapper _mapper;
         private readonly ILogger<DeleteQueryHandler> _logger;
 
-        public DeleteQueryHandler(IOrderRepository orderRepository, IMapper mapper, ILogger<DeleteQueryHandler> logger)
+        public DeleteQueryHandler(IOrderRepository orderRepository, ILogger<DeleteQueryHandler> logger)
         {
             _orderRepository = orderRepository;
-            _mapper = mapper;
             _logger = logger;
         }
 
