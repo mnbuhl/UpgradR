@@ -1,15 +1,16 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Order.Application.Interfaces;
 using Order.Application.Models;
+using Order.Application.Orders.v1.Queries;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Order.Application.Orders.v1.Commands.Checkout
 {
-    public class CheckoutCommand : IRequest<int>
+    public class CheckoutCommand : IRequest<OrderResponseDto>
     {
         public string UserName { get; set; }
         public decimal TotalPrice { get; set; }
@@ -31,7 +32,7 @@ namespace Order.Application.Orders.v1.Commands.Checkout
         public int PaymentMethod { get; set; }
     }
 
-    public class CheckoutCommandHandler : IRequestHandler<CheckoutCommand, int>
+    public class CheckoutCommandHandler : IRequestHandler<CheckoutCommand, OrderResponseDto>
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IMapper _mapper;
@@ -46,7 +47,7 @@ namespace Order.Application.Orders.v1.Commands.Checkout
             _logger = logger;
         }
 
-        public async Task<int> Handle(CheckoutCommand request, CancellationToken cancellationToken)
+        public async Task<OrderResponseDto> Handle(CheckoutCommand request, CancellationToken cancellationToken)
         {
             var order = _mapper.Map<Domain.Entities.Order>(request);
             var createdOrder = await _orderRepository.AddAsync(order);
@@ -55,7 +56,7 @@ namespace Order.Application.Orders.v1.Commands.Checkout
 
             await SendMail(createdOrder);
 
-            return createdOrder.Id;
+            return _mapper.Map<OrderResponseDto>(createdOrder);
         }
 
         private async Task SendMail(Domain.Entities.Order order)
