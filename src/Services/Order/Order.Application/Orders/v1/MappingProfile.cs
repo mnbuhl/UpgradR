@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Order.Application.Orders.v1.Commands;
 using Order.Application.Orders.v1.Commands.Checkout;
 using Order.Application.Orders.v1.Commands.Update;
 using Order.Application.Orders.v1.Queries;
