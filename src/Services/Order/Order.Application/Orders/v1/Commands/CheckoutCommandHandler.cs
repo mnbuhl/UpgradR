@@ -1,13 +1,13 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using AutoMapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Order.Application.Interfaces;
 using Order.Application.Models;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace Order.Application.Features.Orders.Commands
+namespace Order.Application.Orders.v1.Commands
 {
     public class CheckoutCommand : IRequest<int>
     {

@@ -12,7 +12,7 @@ namespace Order.Application.Behaviors
 
         public UnhandledExceptionBehavior(ILogger<TRequest> logger)
         {
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _logger = logger;
         }
 
         public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)

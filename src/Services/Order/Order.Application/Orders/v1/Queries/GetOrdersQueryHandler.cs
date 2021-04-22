@@ -1,11 +1,11 @@
-﻿using AutoMapper;
-using MediatR;
-using Order.Application.Interfaces;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
+using MediatR;
+using Order.Application.Interfaces;
 
-namespace Order.Application.Features.Orders.Queries
+namespace Order.Application.Orders.v1.Queries
 {
     public class GetOrdersQuery : IRequest<List<OrderResponseDto>>
     {

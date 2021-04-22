@@ -1,4 +1,4 @@
-﻿namespace Order.Application.Features.Orders.Queries
+﻿namespace Order.Application.Orders.v1.Queries
 {
     public class OrderResponseDto
     {

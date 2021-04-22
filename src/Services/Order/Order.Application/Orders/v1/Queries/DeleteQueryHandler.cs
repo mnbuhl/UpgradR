@@ -1,10 +1,10 @@
-﻿using MediatR;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using MediatR;
 using Microsoft.Extensions.Logging;
 using Order.Application.Interfaces;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace Order.Application.Features.Orders.Queries
+namespace Order.Application.Orders.v1.Queries
 {
     public class DeleteQuery : IRequest
     {

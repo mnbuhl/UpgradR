@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Order.Application.Features.Orders.Commands;
-using Order.Application.Features.Orders.Queries;
+using Order.Application.Orders.v1.Commands;
+using Order.Application.Orders.v1.Queries;
 
-namespace Order.Application.Features.Orders
+namespace Order.Application.Orders.v1
 {
     public class MappingProfile : Profile
     {
