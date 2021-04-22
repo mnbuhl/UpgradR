@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 using Order.Application.Interfaces;
 using Order.Application.Models;
 
-namespace Order.Application.Orders.v1.Commands
+namespace Order.Application.Orders.v1.Commands.Checkout
 {
     public class CheckoutCommand : IRequest<int>
     {

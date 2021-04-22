@@ -4,7 +4,7 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using Order.Application.Interfaces;
 
-namespace Order.Application.Orders.v1.Queries
+namespace Order.Application.Orders.v1.Queries.Delete
 {
     public class DeleteQuery : IRequest
     {

@@ -5,25 +5,25 @@ using AutoMapper;
 using MediatR;
 using Order.Application.Interfaces;
 
-namespace Order.Application.Orders.v1.Queries
+namespace Order.Application.Orders.v1.Queries.Get
 {
-    public class GetOrdersQuery : IRequest<List<OrderResponseDto>>
+    public class GetQuery : IRequest<List<OrderResponseDto>>
     {
         public string Username { get; set; }
     }
 
-    public class GetOrdersQueryHandler : IRequestHandler<GetOrdersQuery, List<OrderResponseDto>>
+    public class GetQueryHandler : IRequestHandler<GetQuery, List<OrderResponseDto>>
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IMapper _mapper;
 
-        public GetOrdersQueryHandler(IOrderRepository orderRepository, IMapper mapper)
+        public GetQueryHandler(IOrderRepository orderRepository, IMapper mapper)
         {
             _orderRepository = orderRepository;
             _mapper = mapper;
         }
 
-        public async Task<List<OrderResponseDto>> Handle(GetOrdersQuery request, CancellationToken cancellationToken)
+        public async Task<List<OrderResponseDto>> Handle(GetQuery request, CancellationToken cancellationToken)
         {
             var orders = await _orderRepository.GetOrdersByUsername(request.Username);
             return _mapper.Map<List<OrderResponseDto>>(orders);
