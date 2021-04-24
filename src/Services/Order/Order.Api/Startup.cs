@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Order.Application;
+using Order.Infrastructure;
 
 namespace Order.Api
 {
@@ -21,7 +22,8 @@ namespace Order.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.RegisterServices();
+            services.RegisterApplicationServices();
+            services.RegisterInfrastructureServices(_configuration);
             services.AddApiVersioning(opt =>
             {
                 opt.DefaultApiVersion = new ApiVersion(1, 0);

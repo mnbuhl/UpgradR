@@ -7,9 +7,9 @@ using System.Reflection;
 
 namespace Order.Application
 {
-    public static class ServiceExtensions
+    public static class ApplicationServiceExtensions
     {
-        public static void RegisterServices(this IServiceCollection services)
+        public static void RegisterApplicationServices(this IServiceCollection services)
         {
             services.AddAutoMapper(typeof(MappingProfile).Assembly);
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());

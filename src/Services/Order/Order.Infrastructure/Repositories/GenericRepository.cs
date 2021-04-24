@@ -23,10 +23,7 @@ namespace Order.Infrastructure.Repositories
         {
             IQueryable<T> entities = _context.Set<T>();
 
-            if (orderBy != null)
-            {
-                orderBy(entities);
-            }
+            orderBy?.Invoke(entities);
 
             return await entities.AsNoTracking().ToListAsync();
         }

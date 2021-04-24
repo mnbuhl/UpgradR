@@ -24,7 +24,7 @@ namespace Discount.Grpc.Services.v1
 
         public override async Task<CouponResponse> GetDiscount(GetDiscountRequest request, ServerCallContext context)
         {
-            var coupon = await _discountRepository.GetDiscount(request.ProductId); ;
+            var coupon = await _discountRepository.GetDiscount(request.ProductId);
 
             if (coupon == null)
             {
