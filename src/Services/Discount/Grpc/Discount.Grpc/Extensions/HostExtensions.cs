@@ -44,7 +44,7 @@ namespace Discount.Grpc.Extensions
             }
             catch (NpgsqlException e)
             {
-                const int retryCount = 5;
+                const int retryCount = 20;
                 logger.LogError(e, "Error occurred while migrating PostgreSQL database" + (retry < retryCount ? ", retrying." : ""));
 
                 if (retry < retryCount)

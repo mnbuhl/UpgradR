@@ -31,7 +31,7 @@ namespace Order.Api.Extensions
                     logger.LogError(e,
                         $"An error occurred while migrating database for {nameof(TContext)}" + (retry < 8 ? ", retrying..." : "."));
 
-                    if (retry < 8)
+                    if (retry < 20)
                     {
                         retry++;
                         System.Threading.Thread.Sleep(2000);

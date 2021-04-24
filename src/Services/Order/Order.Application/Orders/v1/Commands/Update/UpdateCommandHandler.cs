@@ -1,9 +1,9 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Order.Application.Interfaces;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Order.Application.Orders.v1.Commands.Update
 {
@@ -53,7 +53,7 @@ namespace Order.Application.Orders.v1.Commands.Update
                 return Unit.Value;
             }
 
-            _mapper.Map(orderToUpdate, request);
+            _mapper.Map(request, orderToUpdate);
 
             await _orderRepository.UpdateAsync(orderToUpdate);
 

@@ -9,9 +9,9 @@ namespace Order.Application.Orders.v1
     {
         public MappingProfile()
         {
-            CreateMap<CheckoutCommand, Domain.Entities.Order>();
-            CreateMap<UpdateCommand, Domain.Entities.Order>();
-            CreateMap<Domain.Entities.Order, OrderResponseDto>();
+            CreateMap<CheckoutCommand, Domain.Entities.Order>().ReverseMap();
+            CreateMap<UpdateCommand, Domain.Entities.Order>().ReverseMap();
+            CreateMap<Domain.Entities.Order, OrderResponseDto>().ReverseMap();
         }
     }
 }
