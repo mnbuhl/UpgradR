@@ -9,7 +9,11 @@ implemented into microservices, running in a scalable docker environment.
 * ASP.NET Core 5 MVC
 * gRPC
 * Dapper
+* MediatR
+* RabbitMQ
+* MassTransit
 * MongoDB
 * Redis
 * PostgreSQL
+* SQL Server
 * Docker

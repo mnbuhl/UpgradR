@@ -6,6 +6,9 @@ docker-compose -f .\docker-compose.yml -f .\docker-compose.override.yml up --bui
 Ports:
 Portainer : http://localhost:9000/ / user=admin pass=secretpw123
 
+RabbitMQ Management: http://localhost:15672/ / user=guest pass=guest
+RabbitMQ http://localhost:5672/
+
 Catalog.Api : http://localhost:8000/swagger/index.html
 CatalogDb : http://localhost:27017/ / MongoDb
 MongoDB GUI : http://localhost:3000/ / docker run -d -p 3000:3000 mongoclient/mongoclient
@@ -14,6 +17,10 @@ Basket.Api : http://localhost:8001/swagger/index.html
 BasketCache : http://localhost:6379/ / Redis
 
 Discount.Api : http://localhost:8002/swagger/index.html
+Discount.Grpc : http://localhost:8003/
 DiscountDb : http://localhost:5432/ / PostgreSQL
 pgAdmin : http://localhost:5050/ / user=admin@upgradr.com pass=secretpw123
+
+Order.Api : http://localhost:8004/swagger/index.html
+SQL Server : http://localhost:1433/
 
