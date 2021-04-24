@@ -1,8 +1,6 @@
-﻿using Order.Domain.Common;
-
-namespace Order.Domain.Entities
+﻿namespace EventBus.Messages.Events
 {
-    public class Order : BaseEntity
+    public class BasketCheckoutEvent : IntegrationBaseEvent
     {
         public string UserName { get; set; }
         public decimal TotalPrice { get; set; }
