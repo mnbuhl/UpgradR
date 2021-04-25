@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
+using Basket.Core.Contracts.v1.CheckoutBaskets;
 using Basket.Core.Contracts.v1.ShoppingCarts;
 using Basket.Core.Entities;
 using Basket.Core.Interfaces;
+using EventBus.Messages.Events;
+using MassTransit;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -18,14 +21,16 @@ namespace Basket.Api.Controllers.v1
         private readonly IMapper _mapper;
         private readonly ILogger<BasketController> _logger;
         private readonly IDiscountGrpcService _discountGrpcService;
+        private readonly IPublishEndpoint _publishEndpoint;
 
         public BasketController(IBasketRepository basketRepository, ILogger<BasketController> logger,
-            IMapper mapper, IDiscountGrpcService discountGrpcService)
+            IMapper mapper, IDiscountGrpcService discountGrpcService, IPublishEndpoint publishEndpoint)
         {
             _basketRepository = basketRepository;
             _logger = logger;
             _mapper = mapper;
             _discountGrpcService = discountGrpcService;
+            _publishEndpoint = publishEndpoint;
         }
 
         [HttpGet("{userName}", Name = "GetBasket")]
@@ -43,6 +48,30 @@ namespace Basket.Api.Controllers.v1
             var basketResponse = _mapper.Map<ShoppingCartResponseDto>(basket);
 
             return Ok(basketResponse);
+        }
+
+        [HttpPost("[action]")]
+        [ProducesResponseType(StatusCodes.Status202Accepted)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult> Checkout([FromBody] BasketCheckout basketCheckout)
+        {
+            // Get shopping cart
+            var basket = await _basketRepository.GetBasket(basketCheckout.UserName);
+            var basketDto = _mapper.Map<ShoppingCartResponseDto>(basket);
+
+            if (basket == null)
+                return NotFound();
+
+            // Create eventMessage and send it to RabbitMQ with MassTransit
+            var eventMessage = _mapper.Map<BasketCheckoutEvent>(basketCheckout);
+            eventMessage.TotalPrice = basketDto.TotalPrice;
+
+            await _publishEndpoint.Publish(eventMessage);
+
+            // Remove the users basket. 
+            await _basketRepository.DeleteBasket(basketDto.UserName);
+
+            return Accepted();
         }
 
         [HttpPost]
